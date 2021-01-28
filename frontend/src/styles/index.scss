@@ -1,0 +1,66 @@
+@import './common/mixins';
+@import './common/variables';
+
+@import './components/atoms/button.scss';
+@import './components/atoms/headerMenuItem.scss';
+@import './components/atoms/logo.scss';
+@import './components/atoms/pageTitle.scss';
+@import './components/atoms/textInput.scss';
+
+@import './components/molecules/unauthorizedHeaderMenu.scss';
+@import './components/molecules/table.scss';
+
+@import './components/templates/addProjectModal.scss';
+@import './components/templates/homePage.scss';
+@import './components/templates/signInPage.scss';
+@import './components/templates/signUpPage.scss';
+@import './components/templates/wrappers/header.scss';
+@import './components/templates/wrappers/footer.scss';
+@import './components/templates/wrappers/modalWrapper.scss';
+
+body {
+  font-family: Arial !important;
+
+  &.stop-scrolling {
+    height: 100%; 
+    overflow: hidden;
+  }
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.container {
+  max-width: $max-width-default;
+  margin: 75px auto 0px;
+  min-height: calc(100vh - 75px);
+  padding: 10px 20px;
+
+  .page-title {
+    margin-top: 2vh;
+    text-align: center;
+  }
+}
+
+a {
+  outline: none;
+  text-decoration: none;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.Toastify__toast {
+  font-weight: 600;
+  border-radius: 8px;
+
+  &-container {
+    top: 5em;
+  }
+  
+  &--success {
+    background: $success-color;
+  }
+}
