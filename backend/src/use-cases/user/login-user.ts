@@ -1,5 +1,5 @@
 import { UseCase } from "use-cases.types";
-import { LoginUserDTO } from "DTO.types";
+import { LoginUserDTO } from "dto.types";
 import { TokenServiceConstructable } from 'services.types';
 import { LoginResponse } from 'response.types';
 

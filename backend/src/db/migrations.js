@@ -12,6 +12,8 @@ const config = {
   password: process.env.POSTGRES_PASS
 };
 
+console.log(config);
+
 const client = new Client(config);
 
 async function init() {

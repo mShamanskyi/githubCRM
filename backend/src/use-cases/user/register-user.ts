@@ -1,6 +1,6 @@
 import { User } from "../../domains";
 import { UseCase } from "use-cases.types";
-import { RegisterUserDTO } from "DTO.types";
+import { RegisterUserDTO } from "dto.types";
 import { UserData } from "entities.types";
 
 import SystemError from '../../system-errors/system-error';

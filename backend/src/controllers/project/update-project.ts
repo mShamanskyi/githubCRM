@@ -1,16 +1,16 @@
 import { HttpRequest, HttpResponse, StatusCode } from "http-controller.types";
 import { logger } from "../../services/logger";
 import SystemError from '../../system-errors/system-error';
-import { RegisterProject } from '../../use-cases';
+import { UpdateProject } from '../../use-cases';
 import { ServiceErrorCodes, UserErrorCodes } from '../../system-errors/error-codes';
 
-const useCase = new RegisterProject();
+const useCase = new UpdateProject();
 
-export default async function registerProject(httpRequest: HttpRequest): Promise<HttpResponse> {
+export default async function updateProject(httpRequest: HttpRequest): Promise<HttpResponse> {
   try {
 
-    const result = await useCase.execute({ ...httpRequest.body, createdBy: httpRequest.locals.user.id });
-    
+    const result = await useCase.execute(httpRequest.params.id, httpRequest.locals.user);
+
     if (result instanceof SystemError) {
       let statusCode: StatusCode = 400;
 

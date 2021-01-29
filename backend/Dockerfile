@@ -4,8 +4,8 @@ WORKDIR /usr/src/app/backend
 
 COPY . . 
 
-RUN npm i
+RUN npm i && npm run build
 
 EXPOSE 3200
 
-CMD ["npm", "run", "dev"]
+CMD ["sh", "-c", "npm run migrate && npm run dev"]

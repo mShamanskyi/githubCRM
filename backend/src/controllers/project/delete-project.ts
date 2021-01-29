@@ -1,23 +1,27 @@
+import { DeleteProject } from '../../use-cases';
 import { HttpRequest, HttpResponse, StatusCode } from "http-controller.types";
 import { logger } from "../../services/logger";
 import SystemError from '../../system-errors/system-error';
-import { RegisterProject } from '../../use-cases';
-import { ServiceErrorCodes, UserErrorCodes } from '../../system-errors/error-codes';
+import { ProjectDeleteErrors, ServiceErrorCodes } from '../../system-errors/error-codes';
 
-const useCase = new RegisterProject();
+const useCase = new DeleteProject();
 
-export default async function registerProject(httpRequest: HttpRequest): Promise<HttpResponse> {
+export default async function deleteProject(httpRequest: HttpRequest): Promise<HttpResponse> {
   try {
 
-    const result = await useCase.execute({ ...httpRequest.body, createdBy: httpRequest.locals.user.id });
-    
+    const result = await useCase.execute(httpRequest.params.id, httpRequest.locals.user);
+
     if (result instanceof SystemError) {
-      let statusCode: StatusCode = 400;
+      let statusCode: StatusCode;
 
       switch (result.errorCode) {
-        case UserErrorCodes.VALIDATION:
-          statusCode = 400;
+        case ProjectDeleteErrors.FORBIDDEN:
+          statusCode = 403;
           break;
+        case ProjectDeleteErrors.NOTFOUND:
+          statusCode = 404;
+          break;
+
         case ServiceErrorCodes.INTERNAL:
           statusCode = 500;
       }
@@ -35,10 +39,9 @@ export default async function registerProject(httpRequest: HttpRequest): Promise
         "Content-Type": "application/json"
       },
       body: {
-        result,
         error: null
       },
-      statusCode: 201
+      statusCode: 200
     };
   } catch (err) {
     logger.error(err);

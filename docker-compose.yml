@@ -8,12 +8,18 @@ services:
     environment:
       - POSTGRES_DB=github-crm
       - POSTGRES_PASSWORD=w23121991m
+    networks:
+      - default
   nodejs-server:
+    depends_on:
+      - kanban-postgres
     build:
       context: ./backend
     ports:
       - "3200:3200"
     container_name: node-api
+    networks:
+      - default
   react-ui:
     build:
       context: ./frontend
@@ -21,3 +27,8 @@ services:
       - "3000:3000"
     container_name: react-ui
     stdin_open: true
+    networks:
+      - default
+networks:
+  default:
+    driver: bridge 

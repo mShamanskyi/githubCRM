@@ -1,7 +1,7 @@
 import { Project } from "../../domains";
 
 import { UseCase } from "use-cases.types";
-import { RegisterProjectDTO } from "DTO.types";
+import { RegisterProjectDTO } from "dto.types";
 import { ProjectData } from 'entities.types';
 
 import GithubRepoService from "../../services/github-service";
@@ -10,7 +10,7 @@ import SystemError from '../../system-errors/system-error';
 
 import ProjectDataBase from '../../db/project-db';
 
-export default function CreateRegisterBusiness() {
+export default function CreateRegisterProject() {
   return class RegisterProject implements UseCase {
     async execute(data: RegisterProjectDTO): Promise<ProjectData | SystemError> {
       const githubRepoService = new GithubRepoService;

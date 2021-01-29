@@ -5,5 +5,5 @@ export const pool = new Pool({
   host: process.env.POSTGRES_HOST,
   password: process.env.POSTGRES_PASS,
   database: process.env.POSTGRES_DBNAME,
-  port: 9999,
+  port: +process.env.POSTGRES_PORT,
 })
